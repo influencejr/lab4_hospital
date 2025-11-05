@@ -1,74 +1,44 @@
 package Hospital.Main;
 
-import Hospital.Appointments.Appointment;
-import Hospital.Appointments.DispensingOfMedicines;
-import Hospital.Appointments.DoctorOperation;
-import Hospital.Appointments.DoctorVisit;
+import Hospital.Staff.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     static void main() {
 
-        /*
-        * Створюємо список з усіма призначеннями
-        */
-        List<Appointment> appointments = new ArrayList<>();
+        Set<StaffMember> staff = new HashSet<StaffMember>();
+        Set<Patient> patients = new HashSet<Patient>();
 
-        /*
-        * Створюємо новий об'єкт для призначення "Видача ліків"
-        */
-        DispensingOfMedicines dispensingofmedicines = new DispensingOfMedicines(
-                "Видача ліків \"Ібупрофен\"",
-                18,
-                9,
-                18,
-                30,
-                "Василій",
-                "vasyliy_pupkin1990@gmail.com"
-        );
+        User user1 = new User(1L,
+                "Vasyliy",
+                "Pupkin",
+                "vasyka_pupkin",
+                "veryhardpassword_vasya",
+                "vasyliy_pupkin1990@gmail.com");
+        StaffMember userDoctor1 = new StaffMember(user1.getId(),
+                user1,
+                "doctor",
+                "Терапевт");
+        System.out.println(userDoctor1.toString());
 
-
-        /*
-        * Створюємо новий об'єкт для призначення "Призначення до лікаря"
-        */
-        DoctorVisit doctorvisit = new DoctorVisit(
-                "Візит до терапевта через кашель у дитини",
+        User user2 = new User(2L,
+                "Olena",
+                "Pipkina",
+                "oleno4ka_pipkina",
+                "oleno4ka1234",
+                "olena_pipkina1985@gmail.com");
+        Patient userPatient1 = new Patient(2L,
+                user2,
+                "patient",
+                "Видача ліків",
                 13,
-                10,
-                10,
-                00,
-                "Людмила",
-                "lyudmula_borusivna1979@gmail.com"
-        );
-
-
-        /*
-        * Створюємо новий об'єкт для призначення "Операція"
-        */
-        DoctorOperation doctoroperation = new DoctorOperation(
-                "Операція на серці у чоловіка, 32 роки",
-                19,
                 12,
-                15,
-                45,
-                "Андрій",
-                "andrew_thesurgeon1985@gmail.com"
-        );
+                11,
+                10);
+        System.out.println(userPatient1.toString());
 
 
-        /*
-        * Додаємо наші призначення в список усіх призначень
-        */
-        appointments.add(dispensingofmedicines);
-        appointments.add(doctorvisit);
-        appointments.add(doctoroperation);
-
-
-        /*
-        * Виводимо всі наші призначення на екран
-        */
-        appointments.forEach(System.out::println);
     }
 }

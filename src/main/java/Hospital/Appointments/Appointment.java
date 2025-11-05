@@ -1,27 +1,32 @@
 package Hospital.Appointments;
 
 
+import lombok.*;
+
+@Getter
+@Setter
+
 /*
 * Абстрактний клас, який використовується для створення призначень
 */
 public abstract class Appointment {
 
     /*ID призначення*/
-    public Long id;
+    private Long id;
 
-    public static Long nextid = 1L;
+    private static Long nextid = 1L;
 
     /*
     * Назва призначення, наприклад: видача ліків, прийом у лікаря, операція...
     */
-    public String appointment_name;
+    private String appointment_name;
 
 
     /*
     * Опис призначення, наприклад: видача ліків від головної болі,
     * прийом у терапевта через кашель, операція по видаленню...
     */
-    public String appointment_description;
+    private String appointment_description;
 
 
     /*
@@ -31,16 +36,16 @@ public abstract class Appointment {
     * appointment_hour - година призначення
     * appointment_minute - хвилини призначення
     */
-    public int appointment_day;
-    public int appointment_month;
-    public int appointment_hour;
-    public int appointment_minute;
+    private int appointment_day;
+    private int appointment_month;
+    private int appointment_hour;
+    private int appointment_minute;
 
     /*
     * Дані лікаря, до якого зробили це призначення
     */
-    public String appointment_doctor_name;
-    public String appointment_doctor_email;
+    private String appointment_doctor_name;
+    private String appointment_doctor_email;
 
     public abstract String toString();
 

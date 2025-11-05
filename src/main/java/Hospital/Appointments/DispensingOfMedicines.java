@@ -1,6 +1,10 @@
 package Hospital.Appointments;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+
 /*
 * Клас створення призначення "Видача ліків"
 */
@@ -11,7 +15,7 @@ public class DispensingOfMedicines extends Appointment {
     * Конструктор без параметрів з встановленою назвою призначення
     */
     public DispensingOfMedicines() {
-        appointment_name = "Видача ліків";
+        this.setAppointment_name("Видача ліків");
     }
 
     /*
@@ -31,15 +35,15 @@ public class DispensingOfMedicines extends Appointment {
                                  int appointment_minutes,
                                  String appointment_doctor_name,
                                  String appointment_doctor_email) {
-        this.appointment_name = "Видача ліків";
-        this.id = id;
-        this.appointment_description = appointment_description;
-        this.appointment_day = appointment_day;
-        this.appointment_month = appointment_month;
-        this.appointment_hour = appointment_hour;
-        this.appointment_minute = appointment_minutes;
-        this.appointment_doctor_name = appointment_doctor_name;
-        this.appointment_doctor_email = appointment_doctor_email;
+        this.setAppointment_name("Видача ліків");
+        this.setId(this.getId());
+        this.setAppointment_description(appointment_description);
+        this.setAppointment_day(appointment_day);
+        this.setAppointment_month(appointment_month);
+        this.setAppointment_hour(appointment_hour);
+        this.setAppointment_minute(appointment_minutes);
+        this.setAppointment_doctor_name(appointment_doctor_name);
+        this.setAppointment_doctor_email(appointment_doctor_email);
 
         // Збільшуємо id на 1 для всіх видів призначень.
         increment_id();
@@ -47,11 +51,11 @@ public class DispensingOfMedicines extends Appointment {
 
     @Override
     public String toString() {
-        return "\nНазва призначення: " + appointment_name
-                + "\nОпис призначення: " + appointment_description
-                + "\nДень, місяць, година:хвилина призначення: " + appointment_day + ", " + appointment_month + ", " + appointment_hour + ":" + appointment_minute
-                + "\nІм'я та пошта лікаря: " + appointment_doctor_name + ", " + appointment_doctor_email
-                + "\nid призначення: " + id;
+        return "\nНазва призначення: " + getAppointment_name()
+                + "\nОпис призначення: " + getAppointment_description()
+                + "\nДень, місяць, година:хвилина призначення: " + getAppointment_day() + ", " + getAppointment_month() + ", " + getAppointment_hour() + ":" + getAppointment_minute()
+                + "\nІм'я та пошта лікаря: " + getAppointment_doctor_name() + ", " + getAppointment_doctor_email()
+                + "\nid призначення: " + getId();
     }
 
 }
