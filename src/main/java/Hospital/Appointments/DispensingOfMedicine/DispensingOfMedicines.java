@@ -1,8 +1,7 @@
-package Hospital.Appointments;
+package Hospital.Appointments.DispensingOfMedicine;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import Hospital.Appointments.Appointment;
 
 
 /*
@@ -10,6 +9,8 @@ import lombok.Setter;
 */
 public class DispensingOfMedicines extends Appointment {
 
+
+    private MedicineType medicineType;
 
     /*
     * Конструктор без параметрів з встановленою назвою призначення
@@ -33,8 +34,11 @@ public class DispensingOfMedicines extends Appointment {
                                  int appointment_month,
                                  int appointment_hour,
                                  int appointment_minutes,
+                                 String patient_name,
+                                 String patient_email,
                                  String appointment_doctor_name,
-                                 String appointment_doctor_email) {
+                                 String appointment_doctor_email,
+                                 MedicineType medicineType) {
         this.setAppointment_name("Видача ліків");
         this.setId(this.getId());
         this.setAppointment_description(appointment_description);
@@ -42,18 +46,27 @@ public class DispensingOfMedicines extends Appointment {
         this.setAppointment_month(appointment_month);
         this.setAppointment_hour(appointment_hour);
         this.setAppointment_minute(appointment_minutes);
+        this.setPatient_name(patient_name);
+        this.setPatient_email(patient_email);
         this.setAppointment_doctor_name(appointment_doctor_name);
         this.setAppointment_doctor_email(appointment_doctor_email);
+        this.setMedicineType(medicineType);
 
         // Збільшуємо id на 1 для всіх видів призначень.
         increment_id();
+    }
+
+    private void setMedicineType(MedicineType medicineType) {
+        this.medicineType = medicineType;
     }
 
     @Override
     public String toString() {
         return "\nНазва призначення: " + getAppointment_name()
                 + "\nОпис призначення: " + getAppointment_description()
+                + "\n" + medicineType.getMedicineDetails()
                 + "\nДень, місяць, година:хвилина призначення: " + getAppointment_day() + ", " + getAppointment_month() + ", " + getAppointment_hour() + ":" + getAppointment_minute()
+                + "\nІм'я та пошта пацієнта: " + getPatient_name() + ", " + getPatient_email()
                 + "\nІм'я та пошта лікаря: " + getAppointment_doctor_name() + ", " + getAppointment_doctor_email()
                 + "\nid призначення: " + getId();
     }

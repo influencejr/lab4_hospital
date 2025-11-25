@@ -44,6 +44,9 @@ public abstract class Appointment {
     /*
     * Дані лікаря, до якого зробили це призначення
     */
+
+    private String patient_name;
+    private String patient_email;
     private String appointment_doctor_name;
     private String appointment_doctor_email;
 

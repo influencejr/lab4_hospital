@@ -27,6 +27,8 @@ public class DoctorVisit extends Appointment {
                        int appointment_month,
                        int appointment_hour,
                        int appointment_minutes,
+                       String patient_name,
+                       String patient_email,
                        String appointment_doctor_name,
                        String appointment_doctor_email) {
         this.setAppointment_name("Прийом у лікаря");
@@ -36,6 +38,8 @@ public class DoctorVisit extends Appointment {
         this.setAppointment_month(appointment_month);
         this.setAppointment_hour(appointment_hour);
         this.setAppointment_minute(appointment_minutes);
+        this.setPatient_name(patient_name);
+        this.setPatient_email(patient_email);
         this.setAppointment_doctor_name(appointment_doctor_name);
         this.setAppointment_doctor_email(appointment_doctor_email);
 
