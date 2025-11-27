@@ -1,15 +1,21 @@
 package Hospital.Appointments;
 
+import Hospital.Staff.Patient;
+import Hospital.Staff.StaffMember;
+
 /*
 * Клас для створення призначення "Прийом у лікаря"
 */
 public class DoctorVisit extends Appointment {
 
+    private Patient patient;
+    private StaffMember staffMember;
+
     /*
     * Конструктор без параметрів та із встановленою назвою призначення
     */
     public DoctorVisit() {
-        this.setAppointment_name("Прийом у лікаря");
+        this.setApp_name("Прийом у лікаря");
     }
 
     /*
@@ -27,21 +33,17 @@ public class DoctorVisit extends Appointment {
                        int appointment_month,
                        int appointment_hour,
                        int appointment_minutes,
-                       String patient_name,
-                       String patient_email,
-                       String appointment_doctor_name,
-                       String appointment_doctor_email) {
-        this.setAppointment_name("Прийом у лікаря");
+                       Patient patient,
+                       StaffMember staffMember) {
+        this.setApp_name("Прийом у лікаря");
         this.setId(this.getId());
-        this.setAppointment_description(appointment_description);
-        this.setAppointment_day(appointment_day);
-        this.setAppointment_month(appointment_month);
-        this.setAppointment_hour(appointment_hour);
-        this.setAppointment_minute(appointment_minutes);
-        this.setPatient_name(patient_name);
-        this.setPatient_email(patient_email);
-        this.setAppointment_doctor_name(appointment_doctor_name);
-        this.setAppointment_doctor_email(appointment_doctor_email);
+        this.setApp_description(appointment_description);
+        this.setApp_day(appointment_day);
+        this.setApp_month(appointment_month);
+        this.setApp_hour(appointment_hour);
+        this.setApp_minute(appointment_minutes);
+        this.setPatient(patient);
+        this.setStaffMember(staffMember);
 
         // Збільшуємо id на 1 для всіх видів призначень.
         increment_id();
@@ -49,10 +51,10 @@ public class DoctorVisit extends Appointment {
 
     @Override
     public String toString() {
-        return "\nНазва призначення: " + getAppointment_name()
-                + "\nОпис призначення: " + getAppointment_description()
-                + "\nДень, місяць, година:хвилина призначення: " + getAppointment_day() + ", " + getAppointment_month() + ", " + getAppointment_hour() + ":" + getAppointment_minute()
-                + "\nІм'я та пошта лікаря: " + getAppointment_doctor_name() + ", " + getAppointment_doctor_email()
+        return "\nНазва призначення: " + getApp_name()
+                + "\nОпис призначення: " + getApp_description()
+                + "\nДень, місяць, година:хвилина призначення: " + getApp_day() + ", " + getApp_month() + ", " + getApp_hour() + ":" + getApp_minute()
+                + "\nІм'я та пошта лікаря: " + staffMember.getUser().getFirstName() + ", " + staffMember.getUser().getEmail()
                 + "\nid призначення: " + getId();
     }
 }

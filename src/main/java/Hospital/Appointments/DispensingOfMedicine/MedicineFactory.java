@@ -3,6 +3,13 @@ package Hospital.Appointments.DispensingOfMedicine;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/*
+* Клас, створенний для перевірки на існування класу з ліками
+*
+* Якщо ліки, назву яких ми передали вже існують, то ми просто повертаємо їх.
+* В протилежному випадку ми створюємо новий клас з назвою, брендом та побічними ефектами.
+* */
 public class MedicineFactory {
     private static Map<String, MedicineType> prescriptions = new HashMap<>();
 

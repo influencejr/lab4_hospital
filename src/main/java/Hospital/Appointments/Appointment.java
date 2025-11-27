@@ -1,6 +1,9 @@
 package Hospital.Appointments;
 
 
+import Hospital.Appointments.DispensingOfMedicine.MedicineType;
+import Hospital.Staff.Patient;
+import Hospital.Staff.StaffMember;
 import lombok.*;
 
 @Getter
@@ -19,14 +22,14 @@ public abstract class Appointment {
     /*
     * Назва призначення, наприклад: видача ліків, прийом у лікаря, операція...
     */
-    private String appointment_name;
+    private String app_name;
 
 
     /*
     * Опис призначення, наприклад: видача ліків від головної болі,
     * прийом у терапевта через кашель, операція по видаленню...
     */
-    private String appointment_description;
+    private String app_description;
 
 
     /*
@@ -36,19 +39,18 @@ public abstract class Appointment {
     * appointment_hour - година призначення
     * appointment_minute - хвилини призначення
     */
-    private int appointment_day;
-    private int appointment_month;
-    private int appointment_hour;
-    private int appointment_minute;
+    private int app_day;
+    private int app_month;
+    private int app_hour;
+    private int app_minute;
+
 
     /*
-    * Дані лікаря, до якого зробили це призначення
-    */
-
-    private String patient_name;
-    private String patient_email;
-    private String appointment_doctor_name;
-    private String appointment_doctor_email;
+    * Об'єкти пацієнта, лікаря та вид ліків, які будуть видавати пацієнту
+    * */
+    private Patient patient;
+    private StaffMember staffMember;
+    private MedicineType medicineType;
 
     public abstract String toString();
 
