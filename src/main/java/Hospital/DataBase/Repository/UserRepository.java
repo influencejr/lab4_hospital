@@ -57,11 +57,35 @@ public class UserRepository extends ConnectionToDB implements UserDAO {
     }
 
     @Override
-    public void update(User obj) {
+    public void update(User user) {
+        String sql = "UPDATE `hospital`.`user` SET " +
+                "`first_name` = ?, `last_name` = ?, `username` = ?, `password` = ?, `email` = ? " +
+                "WHERE `id_user` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getUsername());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getEmail());
+            statement.setInt(6, user.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void delete(User obj) {
+    public void delete(int id) {
+        String sql = "DELETE FROM `hospital`.`user` WHERE `id_user` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

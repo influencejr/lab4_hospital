@@ -27,32 +27,91 @@ public class AppointmentRepository extends ConnectionToDB implements Appointment
 
     @Override
     public void create(Appointment appointment) {
+        String sql = "INSERT INTO `hospital`.`appointment` " +
+                "(`name`, `description`, `day`, `month`, `hour`, `minute`, " +
+                "`result`, `diagnose`, `id_staff`, `id_patient`) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO `hospital`.`appointment` (`name`, `description`, `day`, `month`, `hour`, `minute`, `result`, `diagnose`, `id_staff`, `id_patient`) " +
-                    "VALUES ('"+appointment.getApp_name()+"', '"+appointment.getApp_description()+"', '"+appointment.getApp_day()+"', '"+appointment.getApp_month()+"', '"+appointment.getApp_hour()+"', '"+appointment.getApp_minute()+"', '"+appointment.getAppointment_result()+"', '"+appointment.getAppointment_result()+"', '"+appointment.getStaffMember().getId()+"', '"+appointment.getPatient().getId()+"');");
+        ResultSet generatedKeys = null;
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setString(1, appointment.getApp_name());
+            statement.setString(2, appointment.getApp_description());
+            statement.setInt(3, appointment.getApp_day());
+            statement.setInt(4, appointment.getApp_month());
+            statement.setInt(5, appointment.getApp_hour());
+            statement.setInt(6, appointment.getApp_minute());
+
+            statement.setString(7, appointment.getAppointment_result());
+            statement.setString(8, appointment.getAppointment_diagnose());
+
+            if (appointment.getStaffMember() != null) {
+                statement.setInt(9, appointment.getStaffMember().getId());
+            } else {
+                statement.setNull(9, java.sql.Types.INTEGER);
+            }
+
+            if (appointment.getPatient() != null) {
+                statement.setInt(10, appointment.getPatient().getId());
+            } else {
+                statement.setNull(10, java.sql.Types.INTEGER);
+            }
+
+            statement.executeUpdate();
+
+            generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                appointment.setId(generatedKeys.getInt(1));
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+            if (generatedKeys != null) {
+                try { generatedKeys.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         }
 
     }
 
     @Override
-    public void update(Appointment obj) {
+    public void update(Appointment appointment) {
+        String sql = "UPDATE `hospital`.`appointment` SET " +
+                "`name` = ?, `description` = ?, `day` = ?, `month` = ?, `hour` = ?, `minute` = ?, " +
+                "`result` = ?, `diagnose` = ?, `id_staff` = ?, `id_patient` = ? " +
+                "WHERE `id_appointment` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, appointment.getApp_name());
+            statement.setString(2, appointment.getApp_description());
+            statement.setInt(3, appointment.getApp_day());
+            statement.setInt(4, appointment.getApp_month());
+            statement.setInt(5, appointment.getApp_hour());
+            statement.setInt(6, appointment.getApp_minute());
+            statement.setString(7, appointment.getAppointment_result());
+            statement.setString(8, appointment.getAppointment_diagnose());
+
+            statement.setInt(9, appointment.getStaffMember().getId());
+            statement.setInt(10, appointment.getPatient().getId());
+
+            statement.setInt(11, appointment.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void delete(Appointment obj) {
+    public void delete(int id) {
+        String sql = "DELETE FROM `hospital`.`appointment` WHERE `id_appointment` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

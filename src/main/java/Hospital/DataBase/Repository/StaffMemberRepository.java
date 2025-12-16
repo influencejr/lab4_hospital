@@ -51,11 +51,33 @@ public class StaffMemberRepository extends ConnectionToDB implements StaffMember
     }
 
     @Override
-    public void update(StaffMember obj) {
+    public void update(StaffMember staffMember) {
+        String sql = "UPDATE `hospital`.`staff_member` SET " +
+                "`id_user` = ?, `role` = ?, `description` = ? " +
+                "WHERE `id_staff` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, staffMember.getUser().getId());
+            statement.setString(2, staffMember.getRole());
+            statement.setString(3, staffMember.getDescription());
+            statement.setInt(4, staffMember.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void delete(StaffMember obj) {
+    public void delete(int id) {
+        String sql = "DELETE FROM `hospital`.`staff_member` WHERE `id_staff` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

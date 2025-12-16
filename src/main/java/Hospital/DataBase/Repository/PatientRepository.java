@@ -51,11 +51,33 @@ public class PatientRepository extends ConnectionToDB implements PatientDAO {
     }
 
     @Override
-    public void update(Patient obj) {
+    public void update(Patient patient) {
+        String sql = "UPDATE `hospital`.`patient` SET " +
+                "`id_user` = ?, `role` = ?, `description` = ? " +
+                "WHERE `id_patient` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, patient.getUser().getId());
+            statement.setString(2, patient.getRole());
+            statement.setString(3, patient.getDescription());
+            statement.setInt(4, patient.getId());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void delete(Patient obj) {
+    public void delete(int id) {
+        String sql = "DELETE FROM `hospital`.`patient` WHERE `id_patient` = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
