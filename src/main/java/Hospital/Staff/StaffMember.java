@@ -9,12 +9,12 @@ import lombok.*;
 
 public class StaffMember {
 
-    private Long id;
+    private Integer id;
     private User user;
     private String role;
     private String description;
 
-    public StaffMember createUser(Long id,
+    public StaffMember createUser(Integer id,
                                     User user,
                                     String role,
                                     String description) {

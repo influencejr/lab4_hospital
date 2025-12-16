@@ -10,12 +10,12 @@ import lombok.*;
 
 public class Patient{
 
-    private Long id;
+    private Integer id;
     private User user;
     private String role;
     private String description;
 
-    public Patient createUser(Long id,
+    public Patient createUser(Integer id,
                                     User user,
                                     String role,
                                     String description) {

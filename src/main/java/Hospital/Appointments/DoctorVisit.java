@@ -45,16 +45,20 @@ public class DoctorVisit extends Appointment {
         this.setPatient(patient);
         this.setStaffMember(staffMember);
 
-        // Збільшуємо id на 1 для всіх видів призначень.
-        increment_id();
     }
 
     @Override
     public String toString() {
+        String doctorInfo = "Не вказано";
+        if (getStaffMember() != null && getStaffMember().getUser() != null) {
+            doctorInfo = getStaffMember().getUser().getFirstName() + ", " + getStaffMember().getUser().getEmail();
+        }
+
         return "\nНазва призначення: " + getApp_name()
                 + "\nОпис призначення: " + getApp_description()
                 + "\nДень, місяць, година:хвилина призначення: " + getApp_day() + ", " + getApp_month() + ", " + getApp_hour() + ":" + getApp_minute()
-                + "\nІм'я та пошта лікаря: " + staffMember.getUser().getFirstName() + ", " + staffMember.getUser().getEmail()
+                + "\nІм'я та пошта лікаря: " + doctorInfo
                 + "\nid призначення: " + getId();
     }
+
 }

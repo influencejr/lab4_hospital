@@ -47,7 +47,6 @@ public class DoctorOperation extends Appointment {
         this.setStaffMember(staffMember);
 
         // Збільшуємо id на 1 для всіх видів призначень.
-        increment_id();
     }
 
     @Override

@@ -15,7 +15,7 @@ import lombok.*;
 public abstract class Appointment {
 
     /*ID призначення*/
-    private Long id;
+    private Integer id;
 
     private static Long nextid = 1L;
 
@@ -52,10 +52,9 @@ public abstract class Appointment {
     private StaffMember staffMember;
     private MedicineType medicineType;
 
-    public abstract String toString();
+    private String appointment_result;
+    private String appointment_diagnose;
 
-    public void increment_id() {
-        id = nextid++;
-    }
+    public abstract String toString();
 
 }

@@ -39,8 +39,6 @@ public class DispensingOfMedicines extends Appointment {
         this.setStaffMember(staffMember);
         this.setMedicineType(medicineType);
 
-        // Збільшуємо id на 1 для всіх видів призначень.
-        increment_id();
     }
 
     public void setMedicineType(MedicineType medicineType) {
